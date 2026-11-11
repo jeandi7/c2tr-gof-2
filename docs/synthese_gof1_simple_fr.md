@@ -98,9 +98,7 @@ Je suis parti d'une formule naïve (nombre de classes avec une pondération de 1
 Pour chaque pattern déclaré, le diagramme est comparé au schéma attendu de ce pattern : nombre
 minimal de classes, types de relations attendus, méthodes clés.
 
-$$\Phi_i = \underbrace{\min\left(\frac{\text{classes générées}}{\text{classes minimales}},\ 1\right) \times 3}_{\text{classes (0 à 3)}}
-+ \underbrace{\frac{\text{types de relations attendus présents}}{\text{types de relations attendus}} \times 3}_{\text{relations (0 à 3)}}
-+ \underbrace{\frac{\text{méthodes clés trouvées}}{\text{méthodes clés attendues}} \times 4}_{\text{méthodes (0 à 4)}}$$
+![PHI](../images/PHIFR.png)
 
 Le score va de 0 à 10. Si le LLM déclare plusieurs patterns, Φᵢ est la **moyenne** des scores obtenus pour chacun.
 

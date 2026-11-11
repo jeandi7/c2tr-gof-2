@@ -70,7 +70,7 @@ def call_llm(prompt: str, local: bool = True, use_mlx: bool = False) -> tuple[st
     if local and use_mlx:
         return _call_mlx(prompt)
 
-    # -------- LOCAL MODE (Ollama subprocess) --------
+    # -------- LOCAL MODE (Ollama subprocess for example) --------
     if local:
         cpu_samples = []
         stop_event = threading.Event()
