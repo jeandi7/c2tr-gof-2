@@ -1,5 +1,7 @@
 # gof1 — GoF Pattern Detector with Active Inference
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Introduction: CIITR Framework and the Wiki Pattern
 
 Tor-Ståle Hansen's CIITR framework (see his paper of December 2, 2025) defines the minimal
