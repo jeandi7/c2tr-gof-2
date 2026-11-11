@@ -53,7 +53,7 @@ low simply for being small. It was replaced by the per-pattern scoring below.
 
 For each pattern the diagram declares, Φᵢ is bounded to `[0, 10]`:
 
-$$\Phi_i = \underbrace{\min\!\left(\frac{|\text{classes}|}{C_{\min}}, 1\right) \times 3}_{\text{class\_score}} + \underbrace{\frac{|\text{present\_rel\_types} \cap \text{expected\_rel\_types}|}{|\text{expected\_rel\_types}|} \times 3}_{\text{rel\_score}} + \underbrace{\frac{|\text{key methods found}|}{|\text{key methods expected}|} \times 4}_{\text{method\_score}}$$
+![PHI](/images/PHIFR.png)
 
 | Component | Weight | Criterion |
 |-----------|--------|-----------|
@@ -85,26 +85,26 @@ construct.
   a persistent memory (the wiki) carried across cycles, so an inference rhythm can be measured — and
   can stay coherent or drift.
 
-Per C2TR.md (Tor-Ståle Hansen), Rᵍ tracks token-cadence uniformity and phase jitter across inference
-cycles — see how it's actually computed below.
+According to C2TR.md (Tor-Ståle Hansen), Rᵍ tracks the regularity of token cadence and phase jitter
+across inference cycles — see below for the concrete computation.
 
-An agent generating at 50 tokens/s in a perfectly constant way from one call to the next results in a high Rᵍ
-An agent generating at 50 tokens/s but erratically (sometimes 20, sometimes 80) results in a low Rᵍ
+An agent generating at 50 tokens/s in a perfectly constant way from one call to the next gives a high Rᵍ.
+An agent generating at 50 tokens/s but erratically (sometimes 20, sometimes 80) gives a low Rᵍ.
 
 ### Understanding-Event Predicate
 
 `Cᵢ = Φᵢ × Rᵍ` is a **structural predicate, not a score** — the theory note behind this project,
 *Why Understanding Is a Relational Property Between System, Structure, and Energy Cost*
-(Tor-Ståle Hansen, December 2, 2025), states the equation is "not a score or scalar, but a
+(Tor-Ståle Hansen, December 2, 2025), states that the equation is "not a score or scalar, but a
 structural predicate," and that understanding is a transient *event*, not a persistent system trait.
-`is_understanding_event()` (`gof/metamodel.py`) checks, per iteration, whether all three of the
+`is_understanding_event()` (`gof/metamodel.py`) checks, for each iteration, whether all three of the
 following hold — an AND of independent gates, never averaged into a single ratio:
 
 | Gate | Condition | Threshold | Why this threshold |
 |------|-----------|-----------|---------------------|
 | Φᵢ (structural integration) | `Φᵢ ≥ phi_floor` | 6.0 / 10 | 60% of the per-pattern scale — below this the diagram is too incomplete to count, regardless of rhythm |
-| Rᵍ (rhythmic coherence) | `Rᵍ ≥ rg_floor` | 0.3 theoretical / 0.05 MLX runtime calibration | a **magnitude** floor, not mere presence: `Rᵍ > 0` is trivially true in `LLM_AI` (`analyze()`+`update_wiki()` always contribute ≥ 2 cadence samples per iteration); the canonical theory uses a 0.3 threshold, while the MLX runtime calibration currently lowers the gate to 0.05 for practical benchmarking |
-| Energy (CPJ collapse) | `energy ≤ 2 × median(session energies)` | 2.0× | relative to the *session's own* accepted-iteration median, not an absolute constant — raw CPJ varies ~10x between single- and multi-pattern sessions, so a fixed threshold wouldn't transfer across sessions |
+| Rᵍ (rhythmic coherence) | `Rᵍ ≥ rg_floor` | 0.3 | a **magnitude** floor, not mere presence: `Rᵍ > 0` is trivially true in `LLM_AI` (`analyze()`+`update_wiki()` always contribute ≥ 2 cadence samples per iteration), so this does not distinguish between two `LLM_AI` runs; it only distinguishes `LLM_AI` from `LLM_ONLY` (where `Rᵍ = 0` is hard-coded) |
+| Energy (CPJ collapse) | `energy ≤ 2 × median(session energies)` | 2.0× | relative to the *session's own* accepted-iteration median, not an absolute constant — raw CPJ varies by roughly a factor of 10 between single-pattern and multi-pattern sessions, so a fixed threshold would not transfer across sessions |
 
 If any gate fails, the iteration returns `(False, reason)` — the reason names the first failed gate
 (`phi_below_floor`, `rg_below_floor`, `energy_outlier`), logged per iteration in the CSV's
@@ -125,15 +125,15 @@ as a reliable signal for that iteration.
 | Rᵍ | 0.94 → 0.56 (decreasing, but always ≥ 0.3) | 0.21 – 0.25 (stable, always < 0.3) |
 | Understanding events | **4 / 4** | **0 / 4** |
 
-Despite a perfect Φᵢ every time, the remote run never registers as an understanding event — it sits
+Despite a perfect Φᵢ every time, the remote run never registers as an understanding event — it stays
 in the "apparent competence" region (high Φᵢ, insufficient Rᵍ) rather than "conditional
 understanding." Reading Φᵢ alone would have called the remote run the better one; the three-gate
-predicate catches what Φᵢ alone misses. (The local/remote gap is not yet fully isolated from the
+predicate captures what Φᵢ alone misses. (The local/remote gap is not yet fully isolated from the
 model-choice confound — the remote endpoint only serves `devstral-small-2:24b`, so a same-model,
-different-channel comparison isn't currently possible.)
+different-channel comparison is not currently possible.)
 
 **Calibration status**: thresholds derived from 4 local sessions (GOF-001/008/009) and 2 remote
-GOF-001 runs — provisional, not fixed constants. Re-derive them if the pattern mix or LLM backend
+GOF-001 runs — provisional, not fixed constants. Re-derive them if the pattern mix or the LLM backend
 changes materially.
 
 ---
@@ -430,7 +430,7 @@ Theoretical framework: **CIITR** — Tor-Ståle Hansen, Theoretical Note No. 2�
 ---
 ---
 
-# gof1 — GoF Pattern Detector with Active Inference (Français)
+# gof1 — GoF Pattern Detector with Active Inference (French)
 
 ## Introduction : cadre CIITR et pattern wiki
 
@@ -487,6 +487,7 @@ qu'il était petit. Elle a été remplacée par le scoring par pattern ci-dessou
 Pour chaque pattern déclaré par le diagramme, Φᵢ est borné à `[0, 10]` :
 
 ![PHI](/images/PHIFR.png)
+
 
 | Composant | Poids | Critère |
 |-----------|-------|---------|
