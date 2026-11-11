@@ -103,7 +103,7 @@ following hold — an AND of independent gates, never averaged into a single rat
 | Gate | Condition | Threshold | Why this threshold |
 |------|-----------|-----------|---------------------|
 | Φᵢ (structural integration) | `Φᵢ ≥ phi_floor` | 6.0 / 10 | 60% of the per-pattern scale — below this the diagram is too incomplete to count, regardless of rhythm |
-| Rᵍ (rhythmic coherence) | `Rᵍ ≥ rg_floor` | 0.3 | a **magnitude** floor, not mere presence: `Rᵍ > 0` is trivially true in `LLM_AI` (`analyze()`+`update_wiki()` always contribute ≥ 2 cadence samples per iteration), so this does not distinguish between two `LLM_AI` runs; it only distinguishes `LLM_AI` from `LLM_ONLY` (where `Rᵍ = 0` is hard-coded) |
+| Rᵍ (rhythmic coherence) | `Rᵍ ≥ rg_floor` | 0.05 | a **magnitude** floor, not mere presence: `Rᵍ > 0` is trivially true in `LLM_AI` (`analyze()`+`update_wiki()` always contribute ≥ 2 cadence samples per iteration), so this does not distinguish between two `LLM_AI` runs; it only distinguishes `LLM_AI` from `LLM_ONLY` (where `Rᵍ = 0` is hard-coded) |
 | Energy (CPJ collapse) | `energy ≤ 2 × median(session energies)` | 2.0× | relative to the *session's own* accepted-iteration median, not an absolute constant — raw CPJ varies by roughly a factor of 10 between single-pattern and multi-pattern sessions, so a fixed threshold would not transfer across sessions |
 
 If any gate fails, the iteration returns `(False, reason)` — the reason names the first failed gate
@@ -116,25 +116,6 @@ fixed absolute value. Concretely, `energy_outlier` fires when `energy_j > 2 × m
 accepted-iteration energies)`: the CPJ-collapse signature (e.g. the LLM looping or over-generating)
 gets flagged even if Φᵢ and Rᵍ both look fine, because the disproportionate cost invalidates Φᵢ×Rᵍ
 as a reliable signal for that iteration.
-
-**Worked example** (GOF-001, "Logger" Singleton, 4 non-warmup iterations each):
-
-| | Local (`llama3.1:8b`) | Remote (`devstral-small-2:24b`) |
-|---|---|---|
-| Φᵢ | 10, 6, 10, 10 (varies — occasionally misses the mandatory `getInstance` name) | 10, 10, 10, 10 (always perfect) |
-| Rᵍ | 0.94 → 0.56 (decreasing, but always ≥ 0.3) | 0.21 – 0.25 (stable, always < 0.3) |
-| Understanding events | **4 / 4** | **0 / 4** |
-
-Despite a perfect Φᵢ every time, the remote run never registers as an understanding event — it stays
-in the "apparent competence" region (high Φᵢ, insufficient Rᵍ) rather than "conditional
-understanding." Reading Φᵢ alone would have called the remote run the better one; the three-gate
-predicate captures what Φᵢ alone misses. (The local/remote gap is not yet fully isolated from the
-model-choice confound — the remote endpoint only serves `devstral-small-2:24b`, so a same-model,
-different-channel comparison is not currently possible.)
-
-**Calibration status**: thresholds derived from 4 local sessions (GOF-001/008/009) and 2 remote
-GOF-001 runs — provisional, not fixed constants. Re-derive them if the pattern mix or the LLM backend
-changes materially.
 
 ---
 
@@ -554,25 +535,6 @@ quand `energy_j > 2 × médiane(énergies des itérations acceptées de la sessi
 « collapse du CPJ » (ex. le LLM qui boucle ou sur-génère) est ainsi détectée même si Φᵢ et Rᵍ sont
 tous les deux corrects, car un coût disproportionné invalide Φᵢ×Rᵍ comme signal fiable pour cette
 itération.
-
-**Exemple concret** (GOF-001, Logger Singleton, 4 itérations non-warmup chacune) :
-
-| | Local (`llama3.1:8b`) | Remote (`devstral-small-2:24b`) |
-|---|---|---|
-| Φᵢ | 10, 6, 10, 10 (variable — rate parfois le nom mandatory `getInstance`) | 10, 10, 10, 10 (toujours parfait) |
-| Rᵍ | 0.94 → 0.56 (décroissant, mais toujours ≥ 0.3) | 0.21 – 0.25 (stable, toujours < 0.3) |
-| Événements de compréhension | **4 / 4** | **0 / 4** |
-
-Malgré un Φᵢ parfait à chaque fois, le run remote n'enregistre jamais d'événement de compréhension —
-il reste dans la zone de « compétence apparente » (Φᵢ haut, Rᵍ insuffisant) plutôt que « compréhension
-conditionnelle ». Lire Φᵢ seul aurait désigné le run remote comme le meilleur ; le prédicat à trois
-portes capture ce que Φᵢ seul manque. (L'écart local/remote n'est pas encore totalement isolé du
-choix de modèle — le serveur remote ne sert que `devstral-small-2:24b`, une comparaison à modèle
-identique et canal différent n'est pas possible actuellement.)
-
-**Statut de calibration** : seuils dérivés de 4 sessions locales (GOF-001/008/009) et 2 runs remote
-GOF-001 — provisoires, pas des constantes figées. À recalibrer si le mix de patterns ou le backend
-LLM change significativement.
 
 ---
 
