@@ -89,11 +89,7 @@ I started from a naive formula (number of classes with weight 1, number of relat
 
 For each declared pattern, the diagram is compared to the expected schema for that pattern: minimum number of classes, expected relationship types, and key methods.
 
-$$
-\Phi_i = \underbrace{\min\left(\frac{\text{generated classes}}{\text{minimum classes}},\ 1\right) \times 3}_{\text{classes (0 to 3)}}
-+ \underbrace{\frac{\text{expected relationship types present}}{\text{expected relationship types}} \times 3}_{\text{relationships (0 to 3)}}
-+ \underbrace{\frac{\text{key methods found}}{\text{expected key methods}} \times 4}_{\text{methods (0 to 4)}}
-$$
+![PHI](../images/PHIFR.png)
 
 The score ranges from 0 to 10. If the LLM declares several patterns, Φᵢ is the **average** of the scores obtained for each.
 

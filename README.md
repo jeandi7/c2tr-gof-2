@@ -486,7 +486,7 @@ qu'il était petit. Elle a été remplacée par le scoring par pattern ci-dessou
 
 Pour chaque pattern déclaré par le diagramme, Φᵢ est borné à `[0, 10]` :
 
-$$\Phi_i = \underbrace{\min\!\left(\frac{|\text{classes}|}{C_{\min}}, 1\right) \times 3}_{\text{class\_score}} + \underbrace{\frac{|\text{types\_relations\_présents} \cap \text{types\_relations\_attendus}|}{|\text{types\_relations\_attendus}|} \times 3}_{\text{rel\_score}} + \underbrace{\frac{|\text{méthodes clés trouvées}|}{|\text{méthodes clés attendues}|} \times 4}_{\text{method\_score}}$$
+![PHI](/images/PHIFR.png)
 
 | Composant | Poids | Critère |
 |-----------|-------|---------|
