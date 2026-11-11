@@ -1,0 +1,7 @@
+Session,Mode,Iteration,Status,Energy_J,Phi_i,Phi_E,Ci,CPJ,Rg,Pattern,Error,Understanding_Event,Understanding_Reason
+THEORY-ONLY,LLM_ONLY,1,WARMUP,190,9,0.047368,0,0,0,Singleton,,False,rg_below_floor
+THEORY-ONLY,LLM_ONLY,2,ACCEPTED,205,10,0.048780,0,0,0,Singleton,,False,rg_below_floor
+THEORY-ONLY,LLM_ONLY,3,ACCEPTED,185,8,0.043243,0,0,0,Singleton,,False,rg_below_floor
+THEORY-ONLY,LLM_ONLY,4,ACCEPTED,210,10,0.047619,0,0,0,Singleton,,False,rg_below_floor
+THEORY-ONLY,LLM_ONLY,5,ACCEPTED,195,9,0.046154,0,0,0,Singleton,,False,rg_below_floor
+THEORY-ONLY,LLM_ONLY,6,ACCEPTED,200,10,0.050000,0,0,0,Singleton,,False,rg_below_floor

@@ -1,0 +1,68 @@
+- session_id: GOF-001
+  objective: >
+    I need a logger that can only be instantiated once throughout the application.
+    A single global instance must be accessible from anywhere.
+
+- session_id: GOF-002
+  objective: >
+    I want to wrap an existing payment interface to make it compatible
+    with a new checkout system that expects a different interface.
+
+- session_id: GOF-003
+  objective: >
+    I need to notify all registered subscribers whenever a user profile changes.
+    Subscribers should be able to attach and detach dynamically.
+
+- session_id: GOF-004
+  objective: >
+    I want to build a complex SQL query step by step using a fluent API,
+    separating the construction process from the final object.
+
+- session_id: GOF-005
+  objective: >
+    I need to save a snapshot of an editor document state and restore it later
+    to support undo operations without exposing internal details.
+
+- session_id: GOF-006
+  objective: >
+    I need to save a snapshot of an editor document state and restore it later
+    to support undo operations without exposing internal details.
+
+- session_id: GOF-007
+  objective: >
+    Design a text editor system where the document state can be saved as a
+    snapshot and restored later to support undo operations without exposing
+    internal details, and where multiple views such as a toolbar, a status bar,
+    and a preview panel subscribe and automatically update whenever the document
+    content changes.
+
+- session_id: GOF-008
+  objective: >
+    Design a domain model for a file system. The file system contains files,
+    folders, and links. A file is characterised by a name, a creation date,
+    and a size expressed in bytes. Folders can contain other folders, files,
+    or links, forming a tree structure. All entries should be treated uniformly
+    so that operations can be applied recursively across the hierarchy.
+
+
+- session_id: GOF-009
+  objective: >
+    Design a domain model for FileSystem, a file system navigation and management
+    tool inspired by Windows Explorer. FileSystem interacts with the operating
+    system disk management subsystem for physical disk access and must support
+    multiple file system formats such as NTFS and FAT32 that it will implement.
+    A file system contains files, folders, and links. A file has a name, a
+    creation date, and a size in bytes; its size can change on write to simulate
+    basic write operations. A folder has a name, a creation date, and can contain
+    files, links, or other folders. A link has a name, a creation date, and
+    references a file or a folder; links have no size. The size of a folder
+    equals the sum of the sizes of its contents. Within a folder, no two entries
+    may share the same name. Files and folders are organised within a logical
+    unit (drive). A logical unit has a name such as C: or D:, assigned
+    automatically in alphabetical order at creation; it cannot be deleted or
+    modified. A logical unit is created within a disk partition and has a
+    capacity set at format time that depends on the chosen format; available
+    space depends on format and current content. When formatted, a logical unit
+    has a unique root folder. There is a single disk containing all partitions
+    with a fixed total capacity. FileSystem must allow creating and managing
+    trees of files, links, and folders within a logical unit.

@@ -1,0 +1,59 @@
+@startuml
+title GoF Pattern : Observer+Command+Memento
+
+note as GoFLabel
+  **<<Observer+Command+Memento>>**
+end note
+
+class Document {
+  + getContent(): String
+  + setContent(content: String): void
+}
+class DocumentMemento {
+  - content: String
+  + getSavedContent(): String
+}
+class DocumentCaretaker {
+  - mementos: List<DocumentMemento>
+  + saveState(document: Document): void
+  + restoreState(index: int): void
+}
+interface EditorView {
+  + update(): void
+}
+class Toolbar {
+  + update(): void
+}
+class StatusBar {
+  + update(): void
+}
+class PreviewPanel {
+  + update(): void
+}
+interface Command {
+  + execute(): void
+  + undo(): void
+}
+class EditDocumentCommand {
+  - document: Document
+  + execute(): void
+  + undo(): void
+}
+class Editor {
+  - views: List<EditorView>
+  - caretaker: DocumentCaretaker
+  + attach(view: EditorView): void
+  + detach(view: EditorView): void
+  + notify(): void
+}
+
+Document --> DocumentMemento : creates
+DocumentCaretaker --> DocumentMemento : stores
+Toolbar ..|> EditorView
+StatusBar ..|> EditorView
+PreviewPanel ..|> EditorView
+Editor --> EditorView : notifies
+EditDocumentCommand ..|> Command
+EditDocumentCommand --> Document : modifies
+GoFLabel .. Document
+@enduml

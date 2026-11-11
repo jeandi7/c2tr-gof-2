@@ -1,0 +1,34 @@
+@startuml
+title GoF Pattern : Observer+Mediator
+
+note as GoFLabel
+  **<<Observer+Mediator>>**
+end note
+
+class "User" {
+  + id: int
+  + name: String
+  + update(): void
+}
+class "Subscriber" {
+  + name: String
+  + attach(): void
+  + detach(): void
+}
+class "Mediator" {
+  + notify(): void
+}
+class "ConcreteMediator" {
+  + notify(): void
+}
+class "ConcreteSubscriber" {
+  + name: String
+  + update(): void
+}
+
+User --> Mediator : notify
+Subscriber --> Mediator : notify
+Mediator --> ConcreteSubscriber : notify
+ConcreteSubscriber --> ConcreteMediator : notify
+GoFLabel .. User
+@enduml

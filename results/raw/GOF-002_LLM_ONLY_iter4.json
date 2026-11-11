@@ -1,0 +1,60 @@
+{ 
+  "pattern": "Adapter",
+  "patterns": ["Adapter", "Bridge"],
+  "classes": [
+    {
+      "id": "T1",
+      "name": "PaymentInterface",
+      "type": "interface",
+      "attributes": ["- id: int", "+ name: String"],
+      "methods": ["+ pay(): void"]
+    },
+    {
+      "id": "T2",
+      "name": "CheckoutSystemInterface",
+      "type": "interface",
+      "attributes": ["- id: int", "+ name: String"],
+      "methods": ["+ checkout(): void"]
+    },
+    {
+      "id": "A1",
+      "name": "PaymentAdapter",
+      "type": "class",
+      "attributes": ["- id: int", "+ name: String"],
+      "methods": ["+ pay(): void", "+ checkout(): void"]
+    },
+    {
+      "id": "A2",
+      "name": "CheckoutSystemAdapter",
+      "type": "class",
+      "attributes": ["- id: int", "+ name: String"],
+      "methods": ["+ pay(): void", "+ checkout(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "A1",
+      "targetId": "T1",
+      "label": "implements"
+    },
+    {
+      "type": "association",
+      "sourceId": "A2",
+      "targetId": "T2",
+      "label": "implements"
+    },
+    {
+      "type": "association",
+      "sourceId": "A1",
+      "targetId": "T2",
+      "label": "adapts"
+    },
+    {
+      "type": "association",
+      "sourceId": "A2",
+      "targetId": "T1",
+      "label": "adapts"
+    }
+  ]
+}

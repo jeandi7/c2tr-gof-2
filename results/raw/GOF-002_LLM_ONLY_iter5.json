@@ -1,0 +1,41 @@
+{ 
+  "pattern": "Adapter", 
+  "patterns": ["Adapter"], 
+  "classes": [ 
+    { 
+      "id": "T1", 
+      "name": "PaymentInterface", 
+      "type": "interface", 
+      "attributes": ["- id: int", "- name: String"], 
+      "methods": ["- pay(int): void"] 
+    }, 
+    { 
+      "id": "T2", 
+      "name": "CheckoutSystemInterface", 
+      "type": "interface", 
+      "attributes": ["- id: int", "- name: String"], 
+      "methods": ["- checkout(int): void"] 
+    }, 
+    { 
+      "id": "T3", 
+      "name": "PaymentAdapter", 
+      "type": "class", 
+      "attributes": ["- id: int", "- name: String"], 
+      "methods": ["- pay(int): void", "- checkout(int): void"] 
+    } 
+  ], 
+  "relationships": [ 
+    { 
+      "type": "inheritance", 
+      "sourceId": "T3", 
+      "targetId": "T1", 
+      "label": "" 
+    }, 
+    { 
+      "type": "inheritance", 
+      "sourceId": "T3", 
+      "targetId": "T2", 
+      "label": "" 
+    } 
+  ] 
+}

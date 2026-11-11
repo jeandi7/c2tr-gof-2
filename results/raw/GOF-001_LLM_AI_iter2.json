@@ -1,0 +1,16 @@
+```json
+{
+  "pattern": "Singleton",
+  "patterns": ["Singleton"],
+  "classes": [
+    {
+      "id": "Logger",
+      "name": "Logger",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ getInstance(): Logger", "+ log(message: String): void"]
+    }
+  ],
+  "relationships": []
+}
+```

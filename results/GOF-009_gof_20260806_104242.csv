@@ -1,0 +1,6 @@
+Session,Mode,Iteration,Status,Energy_J,Phi_i,Phi_E,Ci,CPJ,Rg,Pattern,Error,Understanding_Event,Understanding_Reason
+GOF-009,LLM_AI,1,WARMUP,1351.757652,10.0,0.00739778,0.0,0.0,0.0,Composite+Bridge+Singleton,,False,rg_below_floor
+GOF-009,LLM_AI,2,ACCEPTED,1119.089286,10.0,0.00893584,5.900341,0.00527245,0.590034,Composite+Bridge+Singleton,,True,conditional_understanding
+GOF-009,LLM_AI,3,ACCEPTED,1114.727975,10.0,0.0089708,6.516512,0.00584583,0.651651,Composite+Bridge+Singleton,,True,conditional_understanding
+GOF-009,LLM_AI,4,ACCEPTED,1085.594121,10.0,0.00921155,6.868353,0.00632681,0.686835,Composite+Bridge+Singleton,,True,conditional_understanding
+GOF-009,LLM_AI,5,ACCEPTED,1092.225901,10.0,0.00915562,7.178824,0.00657266,0.717882,Composite+Bridge+Singleton,,True,conditional_understanding

@@ -1,0 +1,6 @@
+Session,Mode,Iteration,Status,Energy_J,Phi_i,Phi_E,Ci,CPJ,Rg,Pattern,Error,Understanding_Event,Understanding_Reason
+GOF-005,LLM_AI,1,WARMUP,951.920006,6.75,0.00709093,0.0,0.0,0.0,Memento+Observer,,False,rg_below_floor
+GOF-005,LLM_AI,2,ACCEPTED,1022.472458,7.5,0.00733516,0.0,0.0,0.0,Memento+Command,,False,rg_below_floor
+GOF-005,LLM_AI,3,ACCEPTED,998.042305,7.5,0.00751471,7.247071,0.00726129,0.966276,Memento+Command,,True,conditional_understanding
+GOF-005,LLM_AI,4,ACCEPTED,895.058177,8.25,0.00921728,7.543641,0.0084281,0.914381,Memento+Singleton,,True,conditional_understanding
+GOF-005,LLM_AI,5,ACCEPTED,897.662714,8.25,0.00919053,7.547913,0.00840841,0.914899,Memento+Singleton,,True,conditional_understanding

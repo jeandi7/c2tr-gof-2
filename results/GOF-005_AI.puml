@@ -1,0 +1,28 @@
+@startuml
+title GoF Pattern : Memento+Singleton
+
+note as GoFLabel
+  **<<Memento+Singleton>>**
+end note
+
+class "Editor" <<Singleton>> {
+  - state: Memento
+  - save(): void
+  + getInstance(): Editor
+}
+class "Memento" {
+  - state: String
+  - save(): void
+  + restore(): void
+}
+class "Caretaker" {
+  - memento: Memento
+  - save(): void
+  + restore(): void
+}
+
+Editor --> Memento : has
+Editor --> Caretaker : has
+Caretaker --> Memento : has
+GoFLabel .. Editor
+@enduml

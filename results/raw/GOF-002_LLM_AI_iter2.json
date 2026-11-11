@@ -1,0 +1,54 @@
+{
+  "pattern": "Adapter+Singleton",
+  "patterns": ["Adapter", "Singleton"],
+  "classes": [
+    {
+      "id": "Adapter",
+      "name": "PaymentAdapter",
+      "type": "class",
+      "attributes": ["- id: int", "+ paymentInterface: PaymentInterface"],
+      "methods": ["+ request(): void"]
+    },
+    {
+      "id": "Singleton",
+      "name": "CheckoutManager",
+      "type": "class",
+      "attributes": ["- instance: CheckoutManager"],
+      "methods": ["+ getInstance(): CheckoutManager"]
+    },
+    {
+      "id": "Adaptee",
+      "name": "ExistingPaymentInterface",
+      "type": "class",
+      "attributes": [],
+      "methods": ["- request(): void"]
+    },
+    {
+      "id": "Target",
+      "name": "NewCheckoutInterface",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ request(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "inheritance",
+      "sourceId": "Adapter",
+      "targetId": "Adaptee",
+      "label": "Adapter"
+    },
+    {
+      "type": "association",
+      "sourceId": "Adapter",
+      "targetId": "Target",
+      "label": "Adapter"
+    },
+    {
+      "type": "dependency",
+      "sourceId": "Singleton",
+      "targetId": "Adapter",
+      "label": "Singleton"
+    }
+  ]
+}

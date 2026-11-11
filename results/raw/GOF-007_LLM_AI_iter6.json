@@ -1,0 +1,122 @@
+{
+  "pattern": "Observer+Command+Memento",
+  "patterns": ["Observer", "Command", "Memento"],
+  "classes": [
+    {
+      "id": "Document",
+      "name": "Document",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ getContent(): String", "+ setContent(content: String): void"]
+    },
+    {
+      "id": "DocumentMemento",
+      "name": "DocumentMemento",
+      "type": "class",
+      "attributes": ["- content: String"],
+      "methods": []
+    },
+    {
+      "id": "DocumentCaretaker",
+      "name": "DocumentCaretaker",
+      "type": "class",
+      "attributes": ["- mementos: List<DocumentMemento>"],
+      "methods": ["+ save(document: Document): void", "+ restore(index: int): Document"]
+    },
+    {
+      "id": "Command",
+      "name": "Command",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "EditCommand",
+      "name": "EditCommand",
+      "type": "class",
+      "attributes": ["- document: Document", "- newContent: String"],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": ["- document: Document", "- caretaker: DocumentCaretaker"],
+      "methods": ["+ executeCommand(command: Command): void", "+ saveState(): void", "+ restoreState(index: int): void"]
+    },
+    {
+      "id": "Observer",
+      "name": "Observer",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "Toolbar",
+      "name": "Toolbar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "StatusBar",
+      "name": "StatusBar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "PreviewPanel",
+      "name": "PreviewPanel",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "composition",
+      "sourceId": "DocumentCaretaker",
+      "targetId": "DocumentMemento",
+      "label": "mementos"
+    },
+    {
+      "type": "association",
+      "sourceId": "EditCommand",
+      "targetId": "Document",
+      "label": "document"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "EditCommand",
+      "targetId": "Command"
+    },
+    {
+      "type": "composition",
+      "sourceId": "Editor",
+      "targetId": "Document",
+      "label": "document"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "DocumentCaretaker",
+      "label": "caretaker"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "Toolbar",
+      "targetId": "Observer"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "StatusBar",
+      "targetId": "Observer"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "PreviewPanel",
+      "targetId": "Observer"
+    }
+  ]
+}

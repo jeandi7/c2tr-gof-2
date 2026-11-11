@@ -1,0 +1,122 @@
+```json
+{
+  "pattern": "Observer+Command+Memento",
+  "patterns": ["Observer", "Command", "Memento"],
+  "classes": [
+    {
+      "id": "Document",
+      "name": "Document",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ getContent(): String", "+ setContent(content: String): void"]
+    },
+    {
+      "id": "DocumentMemento",
+      "name": "DocumentMemento",
+      "type": "class",
+      "attributes": ["- content: String"],
+      "methods": []
+    },
+    {
+      "id": "DocumentCaretaker",
+      "name": "DocumentCaretaker",
+      "type": "class",
+      "attributes": ["- mementos: List<DocumentMemento>"],
+      "methods": ["+ saveState(document: Document): void", "+ restoreState(index: int): void"]
+    },
+    {
+      "id": "Command",
+      "name": "Command",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "EditDocumentCommand",
+      "name": "EditDocumentCommand",
+      "type": "class",
+      "attributes": ["- document: Document", "- newContent: String"],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "CommandHistory",
+      "name": "CommandHistory",
+      "type": "class",
+      "attributes": ["- commands: List<Command>"],
+      "methods": ["+ addCommand(command: Command): void", "+ undo(): void"]
+    },
+    {
+      "id": "Observer",
+      "name": "Observer",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "Toolbar",
+      "name": "Toolbar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "StatusBar",
+      "name": "StatusBar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "PreviewPanel",
+      "name": "PreviewPanel",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "DocumentCaretaker",
+      "targetId": "DocumentMemento",
+      "label": "manages"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "EditDocumentCommand",
+      "targetId": "Command",
+      "label": ""
+    },
+    {
+      "type": "association",
+      "sourceId": "CommandHistory",
+      "targetId": "Command",
+      "label": "contains"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "Toolbar",
+      "targetId": "Observer",
+      "label": ""
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "StatusBar",
+      "targetId": "Observer",
+      "label": ""
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "PreviewPanel",
+      "targetId": "Observer",
+      "label": ""
+    },
+    {
+      "type": "association",
+      "sourceId": "Document",
+      "targetId": "Observer",
+      "label": "notifies"
+    }
+  ]
+}
+```

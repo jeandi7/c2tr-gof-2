@@ -1,0 +1,120 @@
+```json
+{
+  "pattern": "Observer+Command+Memento",
+  "patterns": ["Observer", "Command", "Memento"],
+  "classes": [
+    {
+      "id": "Document",
+      "name": "Document",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ getContent(): String", "+ setContent(content: String): void"]
+    },
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ executeCommand(command: Command): void", "+ saveState(): Memento", "+ restoreState(memento: Memento): void"]
+    },
+    {
+      "id": "Command",
+      "name": "Command",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "SaveCommand",
+      "name": "SaveCommand",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "Memento",
+      "name": "Memento",
+      "type": "class",
+      "attributes": [],
+      "methods": []
+    },
+    {
+      "id": "Observer",
+      "name": "Observer",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ update(subject: Subject): void"]
+    },
+    {
+      "id": "Subject",
+      "name": "Subject",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ attach(observer: Observer): void", "+ detach(observer: Observer): void", "+ notify(): void"]
+    },
+    {
+      "id": "Toolbar",
+      "name": "Toolbar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(subject: Subject): void"]
+    },
+    {
+      "id": "StatusBar",
+      "name": "StatusBar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(subject: Subject): void"]
+    },
+    {
+      "id": "PreviewPanel",
+      "name": "PreviewPanel",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(subject: Subject): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "inheritance",
+      "sourceId": "SaveCommand",
+      "targetId": "Command"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Document"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Command"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Memento"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "Toolbar",
+      "targetId": "Observer"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "StatusBar",
+      "targetId": "Observer"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "PreviewPanel",
+      "targetId": "Observer"
+    },
+    {
+      "type": "association",
+      "sourceId": "Subject",
+      "targetId": "Observer"
+    }
+  ]
+}
+```

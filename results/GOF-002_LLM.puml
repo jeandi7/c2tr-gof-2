@@ -1,0 +1,27 @@
+@startuml
+title GoF Pattern : Adapter
+
+note as GoFLabel
+  **<<Adapter>>**
+end note
+
+interface "PaymentInterface" as Target {
+  - id: int
+  + amount: float
+  - processPayment(): void
+}
+class "CheckoutAdapter" as Adapter {
+  - paymentInterface: PaymentInterface
+  + checkoutSystem: CheckoutSystem
+  - processPayment(): void
+}
+interface "CheckoutSystem" as Adaptee {
+  - id: int
+  + amount: float
+  - processCheckout(): void
+}
+
+Adapter --> Target : wraps
+Adapter --> Adaptee : uses
+GoFLabel .. Target
+@enduml

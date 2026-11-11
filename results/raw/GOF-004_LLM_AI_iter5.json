@@ -1,0 +1,108 @@
+```json
+{
+  "pattern": "AbstractFactory+Composite+Builder",
+  "patterns": ["AbstractFactory", "Composite", "Builder"],
+  "classes": [
+    {
+      "id": "SQLQueryBuilder",
+      "name": "SQLQueryBuilder",
+      "type": "interface",
+      "methods": ["+ select(String): SQLQueryBuilder", "+ from(String): SQLQueryBuilder", "+ where(String): SQLQueryBuilder", "+ groupBy(String): SQLQueryBuilder", "+ orderBy(String): SQLQueryBuilder", "+ build(): SQLQuery"]
+    },
+    {
+      "id": "MySQLQueryBuilder",
+      "name": "MySQLQueryBuilder",
+      "type": "class",
+      "attributes": ["- query: String"],
+      "methods": ["+ select(String): MySQLQueryBuilder", "+ from(String): MySQLQueryBuilder", "+ where(String): MySQLQueryBuilder", "+ groupBy(String): MySQLQueryBuilder", "+ orderBy(String): SQLQueryBuilder", "+ build(): SQLQuery"]
+    },
+    {
+      "id": "PostgreSQLQueryBuilder",
+      "name": "PostgreSQLQueryBuilder",
+      "type": "class",
+      "attributes": ["- query: String"],
+      "methods": ["+ select(String): PostgreSQLQueryBuilder", "+ from(String): PostgreSQLQueryBuilder", "+ where(String): PostgreSQLQueryBuilder", "+ groupBy(String): PostgreSQLQueryBuilder", "+ orderBy(String): SQLQueryBuilder", "+ build(): SQLQuery"]
+    },
+    {
+      "id": "SQLQuery",
+      "name": "SQLQuery",
+      "type": "interface",
+      "methods": ["+ execute(): String"]
+    },
+    {
+      "id": "MySQLQuery",
+      "name": "MySQLQuery",
+      "type": "class",
+      "attributes": ["- sql: String"],
+      "methods": ["+ execute(): String"]
+    },
+    {
+      "id": "PostgreSQLQuery",
+      "name": "PostgreSQLQuery",
+      "type": "class",
+      "attributes": ["- sql: String"],
+      "methods": ["+ execute(): String"]
+    },
+    {
+      "id": "QueryFactory",
+      "name": "QueryFactory",
+      "type": "interface",
+      "methods": ["+ createBuilder(String): SQLQueryBuilder", "+ createQuery(SQLQueryBuilder): SQLQuery"]
+    },
+    {
+      "id": "MySQLQueryFactory",
+      "name": "MySQLQueryFactory",
+      "type": "class",
+      "methods": ["+ createBuilder(): MySQLQueryBuilder", "+ createQuery(MySQLQueryBuilder): MySQLQuery"]
+    },
+    {
+      "id": "PostgreSQLQueryFactory",
+      "name": "PostgreSQLQueryFactory",
+      "type": "class",
+      "methods": ["+ createBuilder(): PostgreSQLQueryBuilder", "+ createQuery(PostgreSQLQueryBuilder): PostgreSQLQuery"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "implementation",
+      "sourceId": "MySQLQueryBuilder",
+      "targetId": "SQLQueryBuilder"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "PostgreSQLQueryBuilder",
+      "targetId": "SQLQueryBuilder"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "MySQLQuery",
+      "targetId": "SQLQuery"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "PostgreSQLQuery",
+      "targetId": "SQLQuery"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "MySQLQueryFactory",
+      "targetId": "QueryFactory"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "PostgreSQLQueryFactory",
+      "targetId": "QueryFactory"
+    },
+    {
+      "type": "dependency",
+      "sourceId": "MySQLQueryBuilder",
+      "targetId": "MySQLQuery"
+    },
+    {
+      "type": "dependency",
+      "sourceId": "PostgreSQLQueryBuilder",
+      "targetId": "PostgreSQLQuery"
+    }
+  ]
+}
+```

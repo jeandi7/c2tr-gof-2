@@ -1,0 +1,74 @@
+{
+  "pattern": "Memento+Command",
+  "patterns": ["Memento", "Command"],
+  "classes": [
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": ["- state: Memento"],
+      "methods": ["- save(): void", "- restore(Memento): void"]
+    },
+    {
+      "id": "Memento",
+      "name": "Memento",
+      "type": "class",
+      "attributes": ["- state: String"],
+      "methods": ["- save(): void", "- restore(): void"]
+    },
+    {
+      "id": "Command",
+      "name": "Command",
+      "type": "class",
+      "attributes": ["- receiver: Editor"],
+      "methods": ["- execute(): void", "- undo(): void"]
+    },
+    {
+      "id": "ConcreteCommand",
+      "name": "ConcreteCommand",
+      "type": "class",
+      "attributes": ["- receiver: Editor"],
+      "methods": ["- execute(): void", "- undo(): void"]
+    },
+    {
+      "id": "Invoker",
+      "name": "Invoker",
+      "type": "class",
+      "attributes": ["- commands: List<Command>"],
+      "methods": ["- execute(): void", "- undo(): void"]
+    },
+    {
+      "id": "Receiver",
+      "name": "Receiver",
+      "type": "class",
+      "attributes": ["- state: String"],
+      "methods": ["- execute(): void", "- undo(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Memento",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Command",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Command",
+      "targetId": "Invoker",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Invoker",
+      "targetId": "Receiver",
+      "label": "has"
+    }
+  ]
+}

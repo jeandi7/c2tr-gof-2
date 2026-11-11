@@ -1,0 +1,29 @@
+@startuml
+title GoF Pattern : Adapter+Singleton
+
+note as GoFLabel
+  **<<Adapter+Singleton>>**
+end note
+
+class "PaymentAdapter" as Adapter {
+  + paymentInterface: PaymentInterface
+  + checkoutSystemInterface: CheckoutSystemInterface
+  + request(): void
+  + specificrequest(): void
+}
+class "CheckoutSystem" as Singleton <<Singleton>> {
+  + instance: CheckoutSystemInterface
+  + getInstance(): CheckoutSystemInterface
+}
+interface "PaymentInterface" as Target {
+  + request(): void
+}
+interface "CheckoutSystemInterface" as Adaptee {
+  + specificrequest(): void
+}
+
+Adapter --|> Target
+Adapter --> Adaptee
+Singleton ..> Adapter
+GoFLabel .. Adapter
+@enduml

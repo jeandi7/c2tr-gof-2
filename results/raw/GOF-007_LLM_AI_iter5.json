@@ -1,0 +1,124 @@
+```json
+{
+  "pattern": "Observer+Command+Memento",
+  "patterns": ["Observer", "Command", "Memento"],
+  "classes": [
+    {
+      "id": "Document",
+      "name": "Document",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ getContent(): String", "+ setContent(content: String): void"]
+    },
+    {
+      "id": "DocumentMemento",
+      "name": "DocumentMemento",
+      "type": "class",
+      "attributes": ["- content: String"],
+      "methods": ["+ getSavedContent(): String"]
+    },
+    {
+      "id": "DocumentCaretaker",
+      "name": "DocumentCaretaker",
+      "type": "class",
+      "attributes": ["- mementos: List<DocumentMemento>"],
+      "methods": ["+ saveState(document: Document): void", "+ restoreState(index: int): void"]
+    },
+    {
+      "id": "EditorView",
+      "name": "EditorView",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ update(): void"]
+    },
+    {
+      "id": "Toolbar",
+      "name": "Toolbar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(): void"]
+    },
+    {
+      "id": "StatusBar",
+      "name": "StatusBar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(): void"]
+    },
+    {
+      "id": "PreviewPanel",
+      "name": "PreviewPanel",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(): void"]
+    },
+    {
+      "id": "Command",
+      "name": "Command",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "EditDocumentCommand",
+      "name": "EditDocumentCommand",
+      "type": "class",
+      "attributes": ["- document: Document"],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": ["- views: List<EditorView>", "- caretaker: DocumentCaretaker"],
+      "methods": ["+ attach(view: EditorView): void", "+ detach(view: EditorView): void", "+ notify(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "Document",
+      "targetId": "DocumentMemento",
+      "label": "creates"
+    },
+    {
+      "type": "association",
+      "sourceId": "DocumentCaretaker",
+      "targetId": "DocumentMemento",
+      "label": "stores"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "Toolbar",
+      "targetId": "EditorView"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "StatusBar",
+      "targetId": "EditorView"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "PreviewPanel",
+      "targetId": "EditorView"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "EditorView",
+      "label": "notifies"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "EditDocumentCommand",
+      "targetId": "Command"
+    },
+    {
+      "type": "association",
+      "sourceId": "EditDocumentCommand",
+      "targetId": "Document",
+      "label": "modifies"
+    }
+  ]
+}
+```

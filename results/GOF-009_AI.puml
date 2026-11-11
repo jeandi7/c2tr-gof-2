@@ -1,0 +1,75 @@
+@startuml
+title GoF Pattern : Composite+Bridge+Singleton
+
+note as GoFLabel
+  **<<Composite+Bridge+Singleton>>**
+end note
+
+interface FileSystemEntry <<Component>> {
+  + getName(): String
+  + getCreationDate(): Date
+  + getSize(): int
+}
+class File <<Leaf>> {
+  - name: String
+  - creationDate: Date
+  - size: int
+  + getName(): String
+  + getCreationDate(): Date
+  + getSize(): int
+  + write(bytes: int): void
+}
+class Folder <<Composite>> {
+  - name: String
+  - creationDate: Date
+  - children: List<FileSystemEntry>
+  + getName(): String
+  + getCreationDate(): Date
+  + getSize(): int
+  + add(entry: FileSystemEntry): void
+  + remove(name: String): void
+}
+class Link <<Leaf>> {
+  - name: String
+  - creationDate: Date
+  - target: FileSystemEntry
+  + getName(): String
+  + getCreationDate(): Date
+  + getSize(): int
+}
+class LogicalUnit {
+  - name: String
+  - format: FileSystemFormat
+  - root: Folder
+  + getName(): String
+  + getAvailableSpace(): int
+  + format(format: FileSystemFormat): void
+}
+interface FileSystemFormat {
+  + calculateAvailableSpace(capacity: int, used: int): int
+}
+class NTFSFormat {
+  + calculateAvailableSpace(capacity: int, used: int): int
+}
+class FAT32Format {
+  + calculateAvailableSpace(capacity: int, used: int): int
+}
+class DiskManager <<Singleton>> {
+  - totalCapacity: int
+  - logicalUnits: List<LogicalUnit>
+  + getInstance(): DiskManager
+  + createLogicalUnit(name: String, format: FileSystemFormat): LogicalUnit
+}
+
+File ..|> FileSystemEntry
+Folder ..|> FileSystemEntry
+Link ..|> FileSystemEntry
+Folder *--> FileSystemEntry : children
+Link --> FileSystemEntry : target
+LogicalUnit *--> Folder : root
+NTFSFormat ..|> FileSystemFormat
+FAT32Format ..|> FileSystemFormat
+LogicalUnit *--> FileSystemFormat : format
+DiskManager *--> LogicalUnit : logicalUnits
+GoFLabel .. FileSystemEntry
+@enduml

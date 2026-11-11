@@ -1,0 +1,80 @@
+{
+  "pattern": "Memento + Observer",
+  "patterns": ["Memento", "Observer"],
+  "classes": [
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": ["- state: Memento"],
+      "methods": ["- save(): void", "- restore(Memento): void"]
+    },
+    {
+      "id": "Document",
+      "name": "Document",
+      "type": "class",
+      "attributes": ["- text: String"],
+      "methods": ["- getText(): String", "- setText(String): void"]
+    },
+    {
+      "id": "Memento",
+      "name": "Memento",
+      "type": "class",
+      "attributes": ["- state: String"],
+      "methods": ["- save(): void", "- restore(): void"]
+    },
+    {
+      "id": "Caretaker",
+      "name": "Caretaker",
+      "type": "class",
+      "attributes": ["- mementos: List<Memento>"],
+      "methods": ["- save(Memento): void", "- restore(): void"]
+    },
+    {
+      "id": "Observer",
+      "name": "Observer",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["- update(): void"]
+    },
+    {
+      "id": "DocumentObserver",
+      "name": "DocumentObserver",
+      "type": "class",
+      "attributes": ["- document: Document"],
+      "methods": ["- update(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Document",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Memento",
+      "label": "uses"
+    },
+    {
+      "type": "association",
+      "sourceId": "Caretaker",
+      "targetId": "Memento",
+      "label": "manages"
+    },
+    {
+      "type": "association",
+      "sourceId": "DocumentObserver",
+      "targetId": "Document",
+      "label": "observes"
+    },
+    {
+      "type": "dependency",
+      "sourceId": "DocumentObserver",
+      "targetId": "Editor",
+      "label": "depends on"
+    }
+  ]
+}

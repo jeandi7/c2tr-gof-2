@@ -1,0 +1,47 @@
+{
+  "pattern": "Memento+Singleton",
+  "patterns": ["Memento", "Singleton"],
+  "classes": [
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": ["- state: Memento"],
+      "methods": ["- save(): void", "+ getInstance(): Editor"]
+    },
+    {
+      "id": "Memento",
+      "name": "Memento",
+      "type": "class",
+      "attributes": ["- state: String"],
+      "methods": ["- save(): void", "+ restore(): void"]
+    },
+    {
+      "id": "Caretaker",
+      "name": "Caretaker",
+      "type": "class",
+      "attributes": ["- memento: Memento"],
+      "methods": ["- save(): void", "+ restore(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Memento",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "Caretaker",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Caretaker",
+      "targetId": "Memento",
+      "label": "has"
+    }
+  ]
+}

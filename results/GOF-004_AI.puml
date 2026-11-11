@@ -1,0 +1,37 @@
+@startuml
+title GoF Pattern : Builder
+
+note as GoFLabel
+  **<<Builder>>**
+end note
+
+interface QueryBuilder {
+  + select(String... columns): QueryBuilder
+  + from(String table): QueryBuilder
+  + where(String condition): QueryBuilder
+  + groupBy(String column): QueryBuilder
+  + orderBy(String column): QueryBuilder
+  + build(): SQLQuery
+}
+class ConcreteQueryBuilder {
+  - String query
+  + select(String... columns): QueryBuilder
+  + from(String table): QueryBuilder
+  + where(String condition): QueryBuilder
+  + groupBy(String column): QueryBuilder
+  + orderBy(String column): QueryBuilder
+  + build(): SQLQuery
+}
+class SQLQuery {
+  - String sql
+  + getSql(): String
+}
+class Director {
+  + constructQuery(QueryBuilder builder): SQLQuery
+}
+
+ConcreteQueryBuilder ..|> QueryBuilder
+Director --> QueryBuilder
+ConcreteQueryBuilder ..> SQLQuery
+GoFLabel .. QueryBuilder
+@enduml

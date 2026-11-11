@@ -1,0 +1,6 @@
+Session,Mode,Iteration,Status,Energy_J,Phi_i,Phi_E,Ci,CPJ,Rg,Pattern,Error,Understanding_Event,Understanding_Reason
+GOF-002,LLM_AI,1,WARMUP,963.00603,10.0,0.01038415,0.0,0.0,0.0,Adapter+Singleton,,False,rg_below_floor
+GOF-002,LLM_AI,2,ACCEPTED,995.416104,9.0,0.00904145,0.0,0.0,0.0,Adapter+Singleton,,False,rg_below_floor
+GOF-002,LLM_AI,3,ACCEPTED,971.957557,10.0,0.01028852,9.854506,0.01013882,0.985451,Adapter+Singleton,,True,conditional_understanding
+GOF-002,LLM_AI,4,ACCEPTED,1080.822916,10.0,0.00925221,9.521215,0.00880923,0.952121,Adapter+Singleton,,True,conditional_understanding
+GOF-002,LLM_AI,5,ACCEPTED,974.093618,9.0,0.00923936,8.618538,0.00884775,0.957615,Adapter+Singleton,,True,conditional_understanding

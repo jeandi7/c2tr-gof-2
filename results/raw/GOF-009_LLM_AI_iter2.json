@@ -1,0 +1,117 @@
+```json
+{
+  "pattern": "Composite+Bridge+Singleton",
+  "patterns": ["Composite", "Bridge", "Singleton"],
+  "classes": [
+    {
+      "id": "FileSystemEntry",
+      "name": "FileSystemEntry",
+      "type": "interface",
+      "methods": ["+ getName(): String", "+ getCreationDate(): Date", "+ getSize(): long"]
+    },
+    {
+      "id": "File",
+      "name": "File",
+      "type": "class",
+      "attributes": ["- name: String", "- creationDate: Date", "- size: long"],
+      "methods": ["+ File(name: String, creationDate: Date)", "+ write(bytes: int): void", "+ getName(): String", "+ getCreationDate(): Date", "+ getSize(): long"]
+    },
+    {
+      "id": "Folder",
+      "name": "Folder",
+      "type": "class",
+      "attributes": ["- name: String", "- creationDate: Date", "- children: List<FileSystemEntry>"],
+      "methods": ["+ Folder(name: String, creationDate: Date)", "+ add(entry: FileSystemEntry): void", "+ remove(entry: FileSystemEntry): void", "+ getName(): String", "+ getCreationDate(): Date", "+ getSize(): long"]
+    },
+    {
+      "id": "Link",
+      "name": "Link",
+      "type": "class",
+      "attributes": ["- name: String", "- creationDate: Date", "- target: FileSystemEntry"],
+      "methods": ["+ Link(name: String, creationDate: Date, target: FileSystemEntry)", "+ getName(): String", "+ getCreationDate(): Date", "+ getSize(): long"]
+    },
+    {
+      "id": "LogicalUnit",
+      "name": "LogicalUnit",
+      "type": "class",
+      "attributes": ["- name: String", "- rootFolder: Folder", "- formatImplementor: FormatImplementor"],
+      "methods": ["+ LogicalUnit(name: String, formatImplementor: FormatImplementor)", "+ getName(): String", "+ getRootFolder(): Folder", "+ getAvailableSpace(): long"]
+    },
+    {
+      "id": "FormatImplementor",
+      "name": "FormatImplementor",
+      "type": "interface",
+      "methods": ["+ format(disk: Disk, capacity: long): LogicalUnit", "+ getUsedSpace(logicalUnit: LogicalUnit): long"]
+    },
+    {
+      "id": "NTFSImplementor",
+      "name": "NTFSImplementor",
+      "type": "class",
+      "methods": ["+ format(disk: Disk, capacity: long): LogicalUnit", "+ getUsedSpace(logicalUnit: LogicalUnit): long"]
+    },
+    {
+      "id": "FAT32Implementor",
+      "name": "FAT32Implementor",
+      "type": "class",
+      "methods": ["+ format(disk: Disk, capacity: long): LogicalUnit", "+ getUsedSpace(logicalUnit: LogicalUnit): long"]
+    },
+    {
+      "id": "Disk",
+      "name": "Disk",
+      "type": "class",
+      "attributes": ["- totalCapacity: long"],
+      "methods": ["+ Disk(totalCapacity: long)", "+ getTotalCapacity(): long", "+ getInstance(): Disk"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "implementation",
+      "sourceId": "File",
+      "targetId": "FileSystemEntry"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "Folder",
+      "targetId": "FileSystemEntry"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "Link",
+      "targetId": "FileSystemEntry"
+    },
+    {
+      "type": "composition",
+      "sourceId": "Folder",
+      "targetId": "FileSystemEntry",
+      "label": "children"
+    },
+    {
+      "type": "association",
+      "sourceId": "Link",
+      "targetId": "FileSystemEntry",
+      "label": "target"
+    },
+    {
+      "type": "composition",
+      "sourceId": "LogicalUnit",
+      "targetId": "Folder",
+      "label": "rootFolder"
+    },
+    {
+      "type": "association",
+      "sourceId": "LogicalUnit",
+      "targetId": "FormatImplementor"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "NTFSImplementor",
+      "targetId": "FormatImplementor"
+    },
+    {
+      "type": "implementation",
+      "sourceId": "FAT32Implementor",
+      "targetId": "FormatImplementor"
+    }
+  ]
+}
+```

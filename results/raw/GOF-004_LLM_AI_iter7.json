@@ -1,0 +1,76 @@
+```json
+{
+  "pattern": "Builder",
+  "patterns": ["Builder"],
+  "classes": [
+    {
+      "id": "QueryBuilder",
+      "name": "QueryBuilder",
+      "type": "interface",
+      "methods": [
+        "+ select(String... columns): QueryBuilder",
+        "+ from(String table): QueryBuilder",
+        "+ where(String condition): QueryBuilder",
+        "+ groupBy(String column): QueryBuilder",
+        "+ orderBy(String column): QueryBuilder",
+        "+ build(): SQLQuery"
+      ]
+    },
+    {
+      "id": "ConcreteQueryBuilder",
+      "name": "ConcreteQueryBuilder",
+      "type": "class",
+      "attributes": [
+        "- String query"
+      ],
+      "methods": [
+        "+ select(String... columns): QueryBuilder",
+        "+ from(String table): QueryBuilder",
+        "+ where(String condition): QueryBuilder",
+        "+ groupBy(String column): QueryBuilder",
+        "+ orderBy(String column): QueryBuilder",
+        "+ build(): SQLQuery"
+      ]
+    },
+    {
+      "id": "Director",
+      "name": "Director",
+      "type": "class",
+      "methods": [
+        "+ constructQuery(QueryBuilder builder): SQLQuery"
+      ]
+    },
+    {
+      "id": "SQLQuery",
+      "name": "SQLQuery",
+      "type": "class",
+      "attributes": [
+        "- String queryString"
+      ],
+      "methods": [
+        "+ getQuery(): String"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "implementation",
+      "sourceId": "ConcreteQueryBuilder",
+      "targetId": "QueryBuilder",
+      "label": ""
+    },
+    {
+      "type": "association",
+      "sourceId": "Director",
+      "targetId": "QueryBuilder",
+      "label": ""
+    },
+    {
+      "type": "dependency",
+      "sourceId": "ConcreteQueryBuilder",
+      "targetId": "SQLQuery",
+      "label": ""
+    }
+  ]
+}
+```

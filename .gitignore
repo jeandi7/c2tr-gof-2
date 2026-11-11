@@ -1,0 +1,14 @@
+# python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# java binary
+
+plantuml.jar
+
+# VScode
+
+.vscode/
+

@@ -1,0 +1,73 @@
+{
+  "pattern": "Adapter+Singleton",
+  "patterns": ["Adapter", "Singleton"],
+  "classes": [
+    {
+      "id": "T1",
+      "name": "Target",
+      "type": "class",
+      "attributes": ["- id: int", "+ name: String"],
+      "methods": ["- process(): void", "+ request(): void"]
+    },
+    {
+      "id": "A1",
+      "name": "Adapter",
+      "type": "class",
+      "attributes": ["- target: Target", "+ adaptee: Adaptee"],
+      "methods": ["- specificrequest(): void", "+ request(): void"]
+    },
+    {
+      "id": "S1",
+      "name": "Singleton",
+      "type": "class",
+      "attributes": ["- instance: Singleton"],
+      "methods": ["+ getInstance(): Singleton"]
+    },
+    {
+      "id": "P1",
+      "name": "Payment",
+      "type": "class",
+      "attributes": ["- amount: int"],
+      "methods": ["- pay(): void"]
+    },
+    {
+      "id": "C1",
+      "name": "Checkout",
+      "type": "class",
+      "attributes": ["- payment: Payment"],
+      "methods": ["- checkout(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "inheritance",
+      "sourceId": "A1",
+      "targetId": "T1",
+      "label": "Adapter"
+    },
+    {
+      "type": "association",
+      "sourceId": "A1",
+      "targetId": "P1",
+      "label": "Adapter"
+    },
+    {
+      "type": "association",
+      "sourceId": "P1",
+      "targetId": "C1",
+      "label": "Payment"
+    },
+    {
+      "type": "dependency",
+      "sourceId": "C1",
+      "targetId": "S1",
+      "label": "Checkout"
+    },
+    {
+      "type": "association",
+      "sourceId": "S1",
+      "targetId": "A1",
+      "label": "Singleton"
+    }
+  ]
+}

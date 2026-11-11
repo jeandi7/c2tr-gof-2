@@ -1,0 +1,67 @@
+{
+  "pattern": "Observer+Mediator",
+  "patterns": ["Observer", "Mediator"],
+  "classes": [
+    {
+      "id": "User",
+      "name": "User",
+      "type": "class",
+      "attributes": ["+ id: int", "+ name: String"],
+      "methods": ["+ update(): void"]
+    },
+    {
+      "id": "Subscriber",
+      "name": "Subscriber",
+      "type": "class",
+      "attributes": ["+ name: String"],
+      "methods": ["+ attach(): void", "+ detach(): void"]
+    },
+    {
+      "id": "Mediator",
+      "name": "Mediator",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ notify(): void"]
+    },
+    {
+      "id": "ConcreteMediator",
+      "name": "ConcreteMediator",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ notify(): void"]
+    },
+    {
+      "id": "ConcreteSubscriber",
+      "name": "ConcreteSubscriber",
+      "type": "class",
+      "attributes": ["+ name: String"],
+      "methods": ["+ update(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "User",
+      "targetId": "Mediator",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "Mediator",
+      "targetId": "ConcreteSubscriber",
+      "label": "has"
+    },
+    {
+      "type": "association",
+      "sourceId": "ConcreteSubscriber",
+      "targetId": "Subscriber",
+      "label": "is"
+    },
+    {
+      "type": "association",
+      "sourceId": "Subscriber",
+      "targetId": "ConcreteSubscriber",
+      "label": "is"
+    }
+  ]
+}

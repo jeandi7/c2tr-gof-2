@@ -1,0 +1,73 @@
+{
+  "pattern": "Observer+Mediator",
+  "patterns": ["Observer", "Mediator"],
+  "classes": [
+    {
+      "id": "User",
+      "name": "User",
+      "type": "class",
+      "attributes": ["+ id: int", "+ name: String"],
+      "methods": ["+ update(): void"]
+    },
+    {
+      "id": "Subscriber",
+      "name": "Subscriber",
+      "type": "class",
+      "attributes": ["+ name: String"],
+      "methods": ["+ attach(User): void", "+ detach(): void"]
+    },
+    {
+      "id": "Mediator",
+      "name": "Mediator",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ notify(User): void"]
+    },
+    {
+      "id": "ConcreteMediator",
+      "name": "ConcreteMediator",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ notify(User): void"]
+    },
+    {
+      "id": "ConcreteSubscriber",
+      "name": "ConcreteSubscriber",
+      "type": "class",
+      "attributes": ["+ name: String"],
+      "methods": ["+ attach(User): void", "+ detach(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "User",
+      "targetId": "Mediator",
+      "label": "notify"
+    },
+    {
+      "type": "association",
+      "sourceId": "Subscriber",
+      "targetId": "Mediator",
+      "label": "attach"
+    },
+    {
+      "type": "association",
+      "sourceId": "Subscriber",
+      "targetId": "Mediator",
+      "label": "detach"
+    },
+    {
+      "type": "association",
+      "sourceId": "ConcreteSubscriber",
+      "targetId": "ConcreteMediator",
+      "label": "attach"
+    },
+    {
+      "type": "association",
+      "sourceId": "ConcreteSubscriber",
+      "targetId": "ConcreteMediator",
+      "label": "detach"
+    }
+  ]
+}

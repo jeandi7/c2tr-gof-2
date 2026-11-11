@@ -1,0 +1,41 @@
+{ 
+  "pattern": "Adapter",
+  "patterns": ["Adapter", "Bridge"],
+  "classes": [
+    {
+      "id": "Target",
+      "name": "PaymentInterface",
+      "type": "interface",
+      "attributes": ["- id: int", "+ amount: float"],
+      "methods": ["- processPayment(): void"]
+    },
+    {
+      "id": "Adapter",
+      "name": "CheckoutAdapter",
+      "type": "class",
+      "attributes": ["- paymentInterface: PaymentInterface", "+ checkoutSystem: CheckoutSystem"],
+      "methods": ["- processPayment(): void"]
+    },
+    {
+      "id": "Adaptee",
+      "name": "CheckoutSystem",
+      "type": "interface",
+      "attributes": ["- id: int", "+ amount: float"],
+      "methods": ["- processCheckout(): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "Adapter",
+      "targetId": "Target",
+      "label": "wraps"
+    },
+    {
+      "type": "association",
+      "sourceId": "Adapter",
+      "targetId": "Adaptee",
+      "label": "uses"
+    }
+  ]
+}

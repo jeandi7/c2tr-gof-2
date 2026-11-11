@@ -1,0 +1,7 @@
+# Mac M-series (M1/M2/M3) — Neural Engine + GPU via MLX
+mlx-lm>=0.21.0
+numpy
+pyyaml
+requests
+# psutil kept for Ollama local fallback (optional on Mac)
+psutil

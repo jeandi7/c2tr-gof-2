@@ -1,0 +1,120 @@
+```json
+{
+  "pattern": "Observer+Command+Memento",
+  "patterns": ["Observer", "Command", "Memento"],
+  "classes": [
+    {
+      "id": "Document",
+      "name": "Document",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ getContent(): String", "+ setContent(content: String): void"]
+    },
+    {
+      "id": "DocumentMemento",
+      "name": "DocumentMemento",
+      "type": "class",
+      "attributes": ["- content: String"],
+      "methods": []
+    },
+    {
+      "id": "History",
+      "name": "History",
+      "type": "class",
+      "attributes": ["- mementos: List<DocumentMemento>"],
+      "methods": ["+ save(document: Document): void", "+ restore(): Document"]
+    },
+    {
+      "id": "EditorCommand",
+      "name": "EditorCommand",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "SetContentCommand",
+      "name": "SetContentCommand",
+      "type": "class",
+      "attributes": ["- document: Document", "- newContent: String"],
+      "methods": ["+ execute(): void", "+ undo(): void"]
+    },
+    {
+      "id": "Editor",
+      "name": "Editor",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ executeCommand(command: EditorCommand): void", "+ undoCommand(): void"]
+    },
+    {
+      "id": "Observer",
+      "name": "Observer",
+      "type": "interface",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "Toolbar",
+      "name": "Toolbar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "StatusBar",
+      "name": "StatusBar",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    },
+    {
+      "id": "PreviewPanel",
+      "name": "PreviewPanel",
+      "type": "class",
+      "attributes": [],
+      "methods": ["+ update(document: Document): void"]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "association",
+      "sourceId": "History",
+      "targetId": "DocumentMemento"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "SetContentCommand",
+      "targetId": "EditorCommand"
+    },
+    {
+      "type": "association",
+      "sourceId": "SetContentCommand",
+      "targetId": "Document"
+    },
+    {
+      "type": "association",
+      "sourceId": "Editor",
+      "targetId": "EditorCommand"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "Toolbar",
+      "targetId": "Observer"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "StatusBar",
+      "targetId": "Observer"
+    },
+    {
+      "type": "inheritance",
+      "sourceId": "PreviewPanel",
+      "targetId": "Observer"
+    },
+    {
+      "type": "association",
+      "sourceId": "Document",
+      "targetId": "Observer"
+    }
+  ]
+}
+```
